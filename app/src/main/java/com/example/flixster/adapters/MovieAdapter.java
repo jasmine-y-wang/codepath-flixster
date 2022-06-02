@@ -3,7 +3,6 @@ package com.example.flixster.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.target.Target;
 import com.example.flixster.MovieDetailsActivity;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
@@ -88,7 +89,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 imageUrl = movie.getPosterPath();
                 placeholderID = R.drawable.flicks_movie_placeholder;
             }
-            Glide.with(context).load(imageUrl).placeholder(placeholderID).into(ivPoster);
+            Glide.with(context).load(imageUrl)
+                    .placeholder(placeholderID)
+                    .centerCrop()
+                    .transform(new RoundedCorners(50))
+                    .into(ivPoster);
         }
 
         // when the user clicks on a row, show MovieDetails Activity for the selected movie
