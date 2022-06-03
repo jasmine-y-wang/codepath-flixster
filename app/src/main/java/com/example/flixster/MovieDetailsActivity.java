@@ -30,10 +30,6 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     // movie to display
     Movie movie;
 
-    // view objects
-    TextView tvTitle;
-    TextView tvOverview;
-    RatingBar rbVoteAverage;
     private ActivityMovieDetailsBinding binding;
 
     @Override
@@ -42,21 +38,18 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         binding = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
         // resolve view objects
         setContentView(binding.getRoot());
-        tvTitle = (TextView) binding.tvTitle;
-        tvOverview = (TextView) binding.tvOverview;
-        rbVoteAverage = (RatingBar) binding.rbVoteAverage;
 
         // unwrap the movie passed in via intent, using its simple name as a key
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
         Log.d(TAG, String.format("Showing details for '%s'", movie.getTitle()));
 
         // set title and overview
-        tvTitle.setText(movie.getTitle());
-        tvOverview.setText(movie.getOverview());
+        binding.tvTitle.setText(movie.getTitle());
+        binding.tvOverview.setText(movie.getOverview());
 
         // vote average is 0-10 so convert to 0-5
         float voteAverage = movie.getVoteAverage().floatValue();
-        rbVoteAverage.setRating(voteAverage / 2.0f);
+        binding.rbVoteAverage.setRating(voteAverage / 2.0f);
 
         // get video from API
         AsyncHttpClient client = new AsyncHttpClient();

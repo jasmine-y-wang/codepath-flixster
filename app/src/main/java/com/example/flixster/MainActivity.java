@@ -35,17 +35,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        RecyclerView rvMovies = binding.rvMovies;
         movies = new ArrayList<>();
 
         // create the adapter
         MovieAdapter movieAdapter = new MovieAdapter(this, movies);
 
         // set the adapter on the recycler view
-        rvMovies.setAdapter(movieAdapter);
+        binding.rvMovies.setAdapter(movieAdapter);
 
         // set a layout manager on the recycler view
-        rvMovies.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvMovies.setLayoutManager(new LinearLayoutManager(this));
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(NOW_PLAYING_URL + getString(R.string.movie_api_key), new JsonHttpResponseHandler() {

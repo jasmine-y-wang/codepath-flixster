@@ -17,7 +17,7 @@ The following **required** functionality is completed:
 
 The following **stretch** features are implemented:
 
-* [ ] Improved the user interface by experimenting with styling and coloring.
+* [x] Improved the user interface by experimenting with styling and coloring.
 * [x] Apply rounded corners for the poster or background images using [Glide transformations](https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library#transformations)
 * [x] Apply the popular [View Binding annotation library](http://guides.codepath.org/android/Reducing-View-Boilerplate-with-ViewBinding) to reduce boilerplate code.
 * [x] Allow video trailers to be played in full-screen using the YouTubePlayerView from the details screen.
@@ -45,7 +45,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2022 Jasmine Wang
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

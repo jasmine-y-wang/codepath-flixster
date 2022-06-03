@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:paddingVertical="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvOverview"
+        app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="30dp" />
 
     <TextView
@@ -42,5 +44,13 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rbVoteAverage" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="310dp"
+        tools:src="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
