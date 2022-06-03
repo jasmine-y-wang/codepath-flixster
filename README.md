@@ -36,7 +36,8 @@ GIF created with Android Studio Emulator recording.
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+While working on this application, I ran into issues with the YouTubePlayer provider due to API 
+compatibility issues. This was resolved by adjusting my AndroidManifest.xml file. 
 
 ## Open-source libraries used
 
