@@ -14,6 +14,7 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
 
     public static final String YOUTUBE_API_KEY = "AIzaSyA5GHARyE7L8_9AkOfYeJ6dfb-3TEq3bdE";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
