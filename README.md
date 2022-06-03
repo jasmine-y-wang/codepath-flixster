@@ -32,7 +32,7 @@ Here's a walkthrough of implemented user stories:
 
 ![App Demo Link](screenshots/gwNTmrTU.gif)
 
-GIF created with [Kap](https://getkap.co/).
+GIF created with Android Studio Emulator recording.
 
 ## Notes
 
