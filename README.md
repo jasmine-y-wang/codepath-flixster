@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-!<img src='https://submissions.us-east-1.linodeobjects.com/metau_android/gwNTmrTU.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![App Demo Link](screenshots/gwNTmrTU.gif)
 
 GIF created with [Kap](https://getkap.co/).
 
