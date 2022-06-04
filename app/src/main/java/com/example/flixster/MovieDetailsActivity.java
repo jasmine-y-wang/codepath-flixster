@@ -2,28 +2,19 @@ package com.example.flixster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.RatingBar;
-import android.widget.TextView;
+import android.view.View;
 
-import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.flixster.databinding.ActivityMovieDetailsBinding;
 import com.example.flixster.models.Movie;
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.parceler.Parcels;
 
-import okhttp3.Headers;
 
-public class MovieDetailsActivity extends YouTubeBaseActivity {
+public class MovieDetailsActivity extends AppCompatActivity {
 
     public static final String TAG = "MovieDetailsActivity";
 
@@ -51,51 +42,26 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         float voteAverage = movie.getVoteAverage().floatValue();
         binding.rbVoteAverage.setRating(voteAverage / 2.0f);
 
-        // get video from API
-        AsyncHttpClient client = new AsyncHttpClient();
-        String movie_url = String.format("https://api.themoviedb.org/3/movie/%d/videos?api_key=%s",
-                movie.getId(), getString(R.string.movie_api_key));
-        client.get(movie_url, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.d(TAG, "onSuccess");
-                JSONObject jsonObject = json.jsonObject;
-                try {
-                    JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i(TAG, "Results: " + results.toString());
-                    String videoId = results.getJSONObject(0).getString("key");
-                    Log.i(TAG, "Video ID: " + videoId);
-                    initializeYoutube(videoId);
-                } catch (JSONException e) {
-                    Log.e(TAG, "Hit json exception", e);
-                    e.printStackTrace();
-                }
-            }
+        Glide.with(this).load(movie.getBackdropPath())
+                .placeholder(R.drawable.flicks_backdrop_placeholder)
+                .centerCrop()
+                .transform(new RoundedCorners(50))
+                .into(binding.ivBackdrop);
 
+        binding.ivBackdrop.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d(TAG, "onFailure: " + response);
+            public void onClick(View v) {
+                openNewActivity();
             }
         });
+
     }
 
-    private void initializeYoutube(String videoId) {
-        // resolve player view from the layout
-        YouTubePlayerView playerView = (YouTubePlayerView) binding.player;
-
-        // initialize with API key
-        playerView.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                // do any work here to cue video, play video, etc
-                youTubePlayer.cueVideo(videoId);
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                // log error
-                Log.e("MovieTrailerActivity", "Error initializing YouTube player");
-            }
-        });
+    public void openNewActivity() {
+        Intent intent = new Intent(this, MovieTrailerActivity.class);
+        // serialize the movie using parceler, use simple name as key
+        intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
+        // show activity
+        startActivity(intent);
     }
 }
